@@ -11,7 +11,7 @@ public class TimerApp {
     public static void main(String[] args) {
 
         JFrame frame = new JFrame("Timer App");
-        frame.setSize(350, 250);
+        frame.setSize(600, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
@@ -20,8 +20,13 @@ public class TimerApp {
 
         JPanel inputPanel = new JPanel();
 
+        JTextField hoursField = new JTextField("0" , 5);
         JTextField minutesField = new JTextField("0", 5);
         JTextField secondsField = new JTextField("10", 5);
+
+        // added hours
+        inputPanel.add(new JLabel("Hours:"));
+        inputPanel.add(hoursField);
 
         inputPanel.add(new JLabel("Minutes:"));
         inputPanel.add(minutesField);
