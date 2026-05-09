@@ -15,7 +15,7 @@ public class TimerApp {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        JLabel timerLabel = new JLabel("00:00", SwingConstants.CENTER);
+        JLabel timerLabel = new JLabel("00:00:00", SwingConstants.CENTER);
         timerLabel.setFont(new Font("Arial", Font.BOLD, 45));
 
         JPanel inputPanel = new JPanel();
@@ -75,10 +75,11 @@ public class TimerApp {
 
                     if (timeLeft == 0) {
                         try {
+                            int hours = Integer.parseInt(hoursField.getText());
                             int minutes = Integer.parseInt(minutesField.getText());
                             int seconds = Integer.parseInt(secondsField.getText());
 
-                            timeLeft = minutes * 60 + seconds;
+                            timeLeft = hours * 3600 + minutes * 60 + seconds;
                             originalTime = timeLeft;
 
                             if (timeLeft <= 0) {
@@ -107,19 +108,29 @@ public class TimerApp {
 
         resetButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 timer.stop();
-                timeLeft = originalTime;
-                timerLabel.setText(formatTime(timeLeft));
+
+                timeLeft = 0;
+                originalTime = 0;
+
+                timerLabel.setText("00:00:00");
+
+                hoursField.setText("0");
+                minutesField.setText("0");
+                secondsField.setText("0");
             }
         });
-
+        
         frame.setVisible(true);
     }
 
     public static String formatTime(int totalSeconds) {
-        int minutes = totalSeconds / 60;
+
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
         int seconds = totalSeconds % 60;
 
-        return String.format("%02d:%02d", minutes, seconds);
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 }
