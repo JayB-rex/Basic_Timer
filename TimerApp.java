@@ -121,7 +121,30 @@ public class TimerApp {
                 secondsField.setText("0");
             }
         });
-        
+
+        // added change colour
+        JButton colorButton = new JButton("Change Color");
+        buttonPanel.add(colorButton);
+
+        colorButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                Color selectedColor = JColorChooser.showDialog(
+                    frame,
+                    "Choose Background Color",
+                    frame.getContentPane().getBackground()
+                );
+
+                if (selectedColor != null) {
+
+                    frame.getContentPane().setBackground(selectedColor);
+
+                    inputPanel.setBackground(selectedColor);
+                    buttonPanel.setBackground(selectedColor);
+                }
+            }
+        });
+
         frame.setVisible(true);
     }
 
